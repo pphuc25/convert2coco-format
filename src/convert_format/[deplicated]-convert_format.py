@@ -1,5 +1,4 @@
 import argparse
-import os
 import json
 
 def config():
@@ -16,8 +15,6 @@ def config():
         raise ValueError("Need both path data to edit and name of file to output.")
     return args
 
-valid_keys = ['images', 'categories', 'annotations']
-valid_images_keys = ['id', 'file_name', 'height', 'width']
 name_2_id = {'stop': 1, 'left': 2, 'right': 3, 'straight': 4, 'no_left': 5, 'no_right': 6}
 
 def main():
@@ -35,27 +32,14 @@ def main():
         json.dump(file_edit, f)
     
 def rm_unrelate_keys(file_edit):
-    keys_rm = [key_check for key_check in file_edit.keys() if key_check not in valid_keys]
-    if keys_rm is None:
-        return file_edit
-    
-    for key_rm in keys_rm: del file_edit[key_rm]
+    del file_edit['licenses']
+    del file_edit['info']
     return file_edit
 
 def rm_unrelate_in_image(file_edit):
-    keys_image_rm = [key_check for key_check in file_edit['images'][0].keys() if key_check not in valid_images_keys]
-    if keys_image_rm is None:
-        return file_edit
-    
-    # Sanity check ---
-    file_name_check, change_name = file_edit['images'][0]['file_name'], False
-    if file_name_check != os.path.basename(file_name_check): change_name = True
-    # ---
-    
     for value_list in file_edit['images']:
-        if change_name == True:
-            value_list['file_name'] = os.path.basename(value_list['file_name'])
-        for key_image_rm in keys_image_rm: del value_list[key_image_rm]
+        del value_list['license']
+        del value_list['date_captured']
     return file_edit
 
 def correct_id_categories(file_edit):
