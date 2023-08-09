@@ -44,13 +44,20 @@ def merge_json(old_file: json, new_file: json)-> json:
     # init a list to save image_id
     save_id_old_annos = []
 
+    # get lenght of the old json
+    len_old_json = len(old_file['annotations'])
+
     # iterate each json file to save image_id to list
-    for index, block in enumerate(old_file['annotations']):
+    for block in old_file['annotations']:
         save_id_old_annos.append(block['image_id'])
 
-    for index, block in enumerate(new_file['annotations']):
-        save_id_old_annos.append(block['image_id'])
-    
+    # Add with len of old_file index to increase the new index of image_id
+    for block in new_file['annotations']:
+        save_id_old_annos.append(int(block['image_id']) + int(len_old_json))
+    # same for id in images column
+    for index, block in enumerate(new_file['images']):
+        block['id'] = int(len_old_json) + index
+
     # merge images column
     old_file['images'].extend(new_file['images'])
 
