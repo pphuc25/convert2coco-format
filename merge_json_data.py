@@ -14,7 +14,7 @@ def config():
     args = parser.parse_args()
     
     # Sanity check
-    if args.path_data_annotation is None or args.name_file_output is None:
+    if args.json_path_1 is None or args.json_path_2 is None or args.name_file_output is None:
         raise ValueError("Need both path data to edit and name of file to output.")
     return args
 
