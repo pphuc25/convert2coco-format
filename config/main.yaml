@@ -1,4 +1,6 @@
-path_data_annotation: data/_annotations.coco.json
-name_file_output: new_file
+data:
+  path_data_annotation: data/_annotations.coco.json
+  path_file_output: data/processed_data
+  name_file_output: new_file
 
 

@@ -90,14 +90,14 @@ def main():
     """
     config = load_config()
 
-    with open(config.path_data_annotation) as f: file_edit = json.load(f)
+    with open(config.data.path_data_annotation) as f: file_edit = json.load(f)
     change_data_fn = ChangeData()
     file_edit = change_data_fn.rm_unrelate_keys(file_edit)
     file_edit = change_data_fn.rm_unrelate_in_image(file_edit)
     dict_transform, file_edit = change_data_fn.correct_id_categories(file_edit)
     file_edit = change_data_fn.correct_area_categoryid(file_edit, dict_transform)
 
-    with open(f"{config.name_file_output}.json", "w") as s:
+    with open(f"{config.data.path_file_output}/{config.data.name_file_output}.json", "w") as s:
         json.dump(file_edit, s)
 
 if __name__ == "__main__":
