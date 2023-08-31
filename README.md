@@ -1,7 +1,13 @@
-# digital-race-race-C
+# Change the format of annotation file to coco format
+For the task of object recognition and object detection, various file annotation formats exist. However, the widely used format is COCO. In our specific task, we require annotations to adhere to a custom-defined format, utilizing the same keys within dictionaries. This repository has been created with the intention of assisting others in seamlessly converting their annotation formats to COCO, tailored to their unique tasks.
 
-## Correct format of annotation file
-Run the command line ``python3 src/convert_format/convert_format.py --path_data_annotation [path to file need to convert] --name_file_output [name new file]``
-- Example: ``python3 src/convert_format/convert_format.py --path_data_annotation /home/pphuc/Coding/Project/digital-race-race-C/src/convert_format/_annotations.coco.json --name_file_output new_file``
+Thanks to contributors [@frostyOtter](https://github.com/frostyOtter), [@andythetechnerd03](https://github.com/andythetechnerd03) and[@justinvo277](https://github.com/justinvo277)
 
-*(Or change in file .sh and run command line `bash run_correct_format.sh`)*
+## How to use code
+To run the file, use the command:
+
+    python src/convert_format.py
+
+In other to change the format specific, change three values `valid_keys`, `valid_images_keys`, `name_2_id` in `src/custome_labels.py`
+
+*You can add the data you want to change in folder data and then change direction in `config/main.yaml` (change the `path_data_annotation` and `name_file_output`)*
